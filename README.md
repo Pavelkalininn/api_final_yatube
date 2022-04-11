@@ -1,31 +1,55 @@
-yatube_project
+# yatube_project
 
 «Социальная сеть блогеров»
-Описание
+
+## Описание
 
 Благодаря этому проекту можно общаться блогерам.
 
-Технологии
+## Технологии
 
-Python 3.7 Django 2.2.19
+    Python 3.7 Django 2.2.19
 
-Запуск проекта dev-режиме
+## Запуск проекта в dev-режиме
 
-    Установите зависимости из файла requirements.txt
+Установите зависимости из файла requirements.txt
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
-    В папке с файлом manage.py выполните команду:
+В папке с файлом manage.py выполните команду:
 
-python manage.py runserver
+    python manage.py runserver
 
-Также, есть API, для получекния токена авторизации перейдите по ссылке 
+## Примеры запросов
+
+Для получекния токена авторизации перейдите по ссылке 
     
-    YATUBE..../api/v1/api-token-auth/
+    POST..../api/v1/jwt/create/
+    
+    {
+    "username": "string",
+    "password": "string"
+    }
+    
+Для обновления токена авторизации перейдите по ссылке 
+    
+    POST..../api/v1/jwt/refresh/
+    
+    {
+    "refresh": "string"
+    }
+    
+Проверить токен можно по ссылке
+    
+    POST..../api/v1/jwt/verify/
+    
+    {
+    "token": "string"
+    }
 
 Сам API доступен по адресу
 
-    YATUBE..../api/v1/
+    GET..../api/v1/
 
 Примеры запросов к API:
 
@@ -76,8 +100,33 @@ python manage.py runserver
     "title": "Математика",
     "slug": "math",
     "description": "Посты на тему математики"
-    } 
+    }
     
+Пример GET-запроса с токеном для получения списка собственных подписок.
 
+    GET .../api/v1/follow/
+Ответ:
 
-Автор Паша Калинин
+    [
+        {
+            "user": "string",
+            "following": "string"
+        }
+    ]
+    
+Подписаться на автора можно передав его username в POST запросе по адресу:
+
+POST .../api/v1/follow/
+
+    {
+        "following": "string"
+    }
+    
+Ответом будет словарь с именами пользователей подписавшегося и подписчика:
+
+    {
+        "user": "string",
+        "following": "string"
+    }
+
+Автор __Паша Калинин__
