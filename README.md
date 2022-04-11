@@ -7,9 +7,9 @@ yatube_project
 
 Технологии
 
-Python 3.7 Django 2.2.19
+    Python 3.7 Django 2.2.19
 
-Запуск проекта dev-режиме
+_Запуск проекта dev-режиме_
 
 Установите зависимости из файла requirements.txt
 
@@ -19,13 +19,34 @@ Python 3.7 Django 2.2.19
 
     python manage.py runserver
 
-Также, есть API, для получекния токена авторизации перейдите по ссылке 
+Для получекния токена авторизации перейдите по ссылке 
     
-    YATUBE..../api/v1/api-token-auth/
+    POST..../api/v1/jwt/create/
+    
+    {
+    "username": "string",
+    "password": "string"
+    }
+    
+Для обновления токена авторизации перейдите по ссылке 
+    
+    POST..../api/v1/jwt/refresh/
+    
+    {
+    "refresh": "string"
+    }
+    
+Проверить токен можно по ссылке
+    
+    POST..../api/v1/jwt/verify/
+    
+    {
+    "token": "string"
+    }
 
 Сам API доступен по адресу
 
-    YATUBE..../api/v1/
+    GET..../api/v1/
 
 Примеры запросов к API:
 
@@ -76,8 +97,33 @@ Python 3.7 Django 2.2.19
     "title": "Математика",
     "slug": "math",
     "description": "Посты на тему математики"
-    } 
+    }
     
+Пример GET-запроса с токеном для получения списка собственных подписок.
 
+    GET .../api/v1/follow/
+Ответ:
+
+    [
+        {
+            "user": "string",
+            "following": "string"
+        }
+    ]
+    
+Подписаться на автора можно передав его username в POST запросе по адресу:
+
+POST .../api/v1/follow/
+
+    {
+        "following": "string"
+    }
+    
+Ответом будет словарь с именами пользователей подписавшегося и подписчика:
+
+    {
+        "user": "string",
+        "following": "string"
+    }
 
 Автор Паша Калинин
