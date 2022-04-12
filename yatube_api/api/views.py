@@ -56,7 +56,10 @@ class FollowViewSet(viewsets.ModelViewSet):
     search_fields = ('following__username',)
 
     def get_queryset(self):
-        return self.request.user.author
+        # Насчёт неправильной выборки не понял. Если проводить выборку по
+        # related_name "following", то тесты не проходит.
+        user = get_object_or_404(User, pk=self.request.user.id)
+        return user.author.all()
 
     def perform_create(self, serializer):
         serializer.save(
