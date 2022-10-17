@@ -1,28 +1,28 @@
 # yatube_project
 
-«Социальная сеть блогеров»
+«Social network of bloggers»
 
-## Описание
+## Description
 
-Благодаря этому проекту можно общаться блогерам.
+Thanks to this project, bloggers can communicate.
 
-## Технологии
+## Technologies
 
     Python 3.7 Django 2.2.19
 
-## Запуск проекта в dev-режиме
+## Dev-mode run
 
-Установите зависимости из файла requirements.txt
+Install dependencies from the file requirements.txt
 
     pip install -r requirements.txt
 
-В папке с файлом manage.py выполните команду:
+In the file folder manage.py run the command:
 
     python manage.py runserver
 
-## Примеры запросов
+## Request examples
 
-Для получекния токена авторизации перейдите по ссылке 
+To get an authorization token, follow the link
     
     POST..../api/v1/jwt/create/
     
@@ -31,7 +31,7 @@
     "password": "string"
     }
     
-Для обновления токена авторизации перейдите по ссылке 
+To update the authorization token, follow the link
     
     POST..../api/v1/jwt/refresh/
     
@@ -39,7 +39,7 @@
     "refresh": "string"
     }
     
-Проверить токен можно по ссылке
+You can check the token by following the link
     
     POST..../api/v1/jwt/verify/
     
@@ -47,65 +47,67 @@
     "token": "string"
     }
 
-Сам API доступен по адресу
+The API itself is available at
 
     GET..../api/v1/
 
-Примеры запросов к API:
+Examples of API requests:
 
-Пример POST-запроса с токеном Антона Чехова: добавление нового поста:
+Example of a POST request with Anton Chekhov token: adding a new post:
 
     POST .../api/v1/posts/
 
     {
-    "text": "Вечером собрались в редакции «Русской мысли».",
+    "text": "Some text",
     "group": 1
     } 
 
-Ответ:
+Answer:
     
     {
     "id": 14,
-    "text": "Вечером собрались в редакции «Русской мысли».",
+    "text": "Some text",
     "author": "anton",
     "image": null,
     "group": 1,
     "pub_date": "2021-06-01T08:47:11.084589Z"
     } 
 
-Пример POST-запроса с токеном Антона Чехова: отправляем новый комментарий к посту с id=14.
+Example of a POST request with Anton Chekhov token: we send a new comment to the post with id=14.
 
     POST .../api/v1/posts/14/comments/
 
     {
-    "text": "тест тест"
+    "text": "test test"
     }
-Ответ:
+Answer:
 
     {
     "id": 4,
     "author": "anton",
     "post": 14,
-    "text": "тест тест",
+    "text": "test test",
     "created": "2021-06-01T10:14:51.388932Z"
     }
 
-Пример GET-запроса с токеном Антона Чехова: получаем информацию о группе.
+Example of a GET request with Anton Chekhov token: getting information about the group.
 
     GET .../api/v1/groups/2/
-Ответ:
+    
+Answer:
 
     {
     "id": 2,
-    "title": "Математика",
+    "title": "Mathematic",
     "slug": "math",
-    "description": "Посты на тему математики"
+    "description": "Math posts"
     }
     
-Пример GET-запроса с токеном для получения списка собственных подписок.
+Example of a GET request with a token to get a list of your own subscriptions.
 
     GET .../api/v1/follow/
-Ответ:
+    
+Answer:
 
     [
         {
@@ -114,7 +116,7 @@
         }
     ]
     
-Подписаться на автора можно передав его username в POST запросе по адресу:
+You can subscribe to the author by passing his username in a POST request to:
 
 POST .../api/v1/follow/
 
@@ -122,11 +124,11 @@ POST .../api/v1/follow/
         "following": "string"
     }
     
-Ответом будет словарь с именами пользователей подписавшегося и подписчика:
+The answer will be a dictionary with the user names of the subscriber and the subscriber:
 
     {
         "user": "string",
         "following": "string"
     }
 
-Автор __Паша Калинин__
+Author __Pavel Kalinin__
